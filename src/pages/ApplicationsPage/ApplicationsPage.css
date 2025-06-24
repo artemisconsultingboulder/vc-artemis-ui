@@ -1,0 +1,273 @@
+.applications-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 6rem 0 2rem 0; /* Add top padding for navbar */
+}
+
+.applications-content {
+  padding: 2rem 0;
+}
+
+/* Header Section */
+.applications-header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.applications-title {
+  color: #D44C4C;
+  font-weight: 700;
+  margin-bottom: 1.5rem !important;
+}
+
+.applications-subtitle {
+  color: #495057;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.applications-description {
+  color: #6c757d;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 1rem auto 1rem auto !important; /* Increased bottom margin for more space before logos */
+  text-align: center !important; /* Center align the description text */
+  display: block !important;
+  width: 100% !important;
+}
+
+/* Benefits Section */
+.benefits-section {
+  margin-bottom: 3rem;
+  margin-left: 2rem !important;
+  text-align: center !important;
+}
+
+.section-title {
+  color: #343a40;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.benefits-list {
+  padding: 0;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center !important;
+}
+
+.benefit-item {
+  padding: 1rem 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.benefit-item:last-child {
+  border-bottom: none;
+}
+
+.benefit-icon {
+  color: #D44C4C;
+  min-width: 56px;
+}
+
+.benefit-text .MuiListItemText-primary {
+  font-weight: 600;
+  color: #343a40;
+}
+
+.benefit-text .MuiListItemText-secondary {
+  color: #6c757d;
+}
+
+/* Alumni Section */
+.alumni-section {
+  margin-bottom: .5rem;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.alumni-description {
+  color: #6c757d;
+  line-height: 1.6;
+  max-width: 500px;
+  margin: 0 auto 1rem auto !important; /* Increased bottom margin for more space before logos */
+  text-align: center !important; /* Center align the description text */
+  display: block !important;
+  width: 100% !important;
+}
+
+.alumni-logos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.company-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.company-logo-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.company-logo {
+  max-width: 100%;
+  max-height: 40px;
+  object-fit: contain;
+}
+
+/* Form Container */
+.application-form-container {
+  padding: 2rem;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 2rem;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-title {
+  color: #D44C4C;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.form-subtitle {
+  color: #6c757d;
+  font-weight: 500;
+}
+
+/* Form Fields */
+.application-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-field .MuiOutlinedInput-root {
+  border-radius: 8px;
+}
+
+.form-field .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #D44C4C;
+}
+
+.form-field .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #D44C4C;
+}
+
+.form-field .MuiInputLabel-root.Mui-focused {
+  color: #D44C4C;
+}
+
+/* File Upload */
+.file-upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.upload-button {
+  border-color: #D44C4C;
+  color: #D44C4C;
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+.upload-button:hover {
+  background-color: rgba(212, 76, 76, 0.04);
+  border-color: #D44C4C;
+}
+
+.upload-help {
+  color: #6c757d;
+  text-align: center;
+}
+
+/* Submit Button */
+.submit-button {
+  background-color: #D44C4C;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.submit-button:hover {
+  background-color: #c03d3d;
+}
+
+.submit-button:disabled {
+  background-color: #adb5bd;
+}
+
+/* Form Notice */
+.form-notice {
+  color: #6c757d;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* Success Alert */
+.success-alert {
+  border-radius: 8px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1200px) {
+  .application-form-container {
+    position: static;
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .applications-page {
+    padding: 5rem 0 1rem 0; /* Maintain navbar spacing on mobile */
+  }
+  
+  .applications-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .applications-title {
+    font-size: 2rem;
+  }
+  
+  .applications-subtitle {
+    font-size: 1.25rem;
+  }
+  
+  .application-form-container {
+    padding: 1.5rem;
+  }
+  
+  .alumni-logos-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.75rem;
+  }
+  
+  .benefits-section {
+    margin-bottom: 2rem;
+  }
+} 

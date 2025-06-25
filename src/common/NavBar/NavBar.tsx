@@ -16,6 +16,7 @@ const NavBar = ({ items }: NavBarProps): React.JSX.Element => {
   const location = useLocation();
 
   const isActive = (path: string): boolean => location.pathname === path;
+  const isLandingPage = location.pathname === '/';
   
   const isDropdownActive = (item: any): boolean => {
     if (!item.dropdown) return false;
@@ -50,9 +51,16 @@ const NavBar = ({ items }: NavBarProps): React.JSX.Element => {
       setIsScrolled(scrollTop > 0);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // Only add scroll listener on landing page
+    if (isLandingPage) {
+      window.addEventListener('scroll', handleScroll);
+    } else {
+      // For non-landing pages, always use scrolled state (black text)
+      setIsScrolled(true);
+    }
+
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isLandingPage]);
 
   useEffect(() => {
     return () => {
@@ -63,7 +71,7 @@ const NavBar = ({ items }: NavBarProps): React.JSX.Element => {
   }, [hoverTimeout]);
 
   return (
-    <nav className={`nav-bar ${isScrolled ? 'nav-bar-scrolled' : 'nav-bar-transparent'}`}>
+    <nav className={`nav-bar ${(isScrolled || !isLandingPage) ? 'nav-bar-scrolled' : 'nav-bar-transparent'}`}>
       <div className="nav-bar-container">
         <div className="nav-bar-left">
           <Link to="/" className="nav-bar-logo">
@@ -72,8 +80,8 @@ const NavBar = ({ items }: NavBarProps): React.JSX.Element => {
               src={logoNoWords} 
               alt="Artemis Logo" 
             />
-            <span className={`nav-bar-logo-text ${isScrolled ? 'nav-bar-logo-text-scrolled' : 'nav-bar-logo-text-transparent'}`}>
-              Artemis
+            <span className={`nav-bar-logo-text ${(isScrolled || !isLandingPage) ? 'nav-bar-logo-text-scrolled' : 'nav-bar-logo-text-transparent'}`}>
+              Artemis Consulting
             </span>
           </Link>
         </div>
@@ -89,7 +97,7 @@ const NavBar = ({ items }: NavBarProps): React.JSX.Element => {
                 onMouseLeave={handleDropdownLeave}
               >
                 <button
-                  className={`nav-bar-link nav-bar-dropdown-trigger ${isDropdownActive(item) ? 'nav-bar-link-active' : ''} ${isScrolled ? 'nav-bar-link-scrolled' : 'nav-bar-link-transparent'}`}
+                  className={`nav-bar-link nav-bar-dropdown-trigger ${isDropdownActive(item) ? 'nav-bar-link-active' : ''} ${(isScrolled || !isLandingPage) ? 'nav-bar-link-scrolled' : 'nav-bar-link-transparent'}`}
                 >
                   {item.name}
                   <ChevronDown size={16} className="nav-bar-dropdown-icon" />
@@ -116,7 +124,7 @@ const NavBar = ({ items }: NavBarProps): React.JSX.Element => {
               <Link
                 key={item.name}
                 to={item.href!}
-                className={`nav-bar-link ${isActive(item.href!) ? 'nav-bar-link-active' : ''} ${isScrolled ? 'nav-bar-link-scrolled' : 'nav-bar-link-transparent'}`}
+                className={`nav-bar-link ${isActive(item.href!) ? 'nav-bar-link-active' : ''} ${(isScrolled || !isLandingPage) ? 'nav-bar-link-scrolled' : 'nav-bar-link-transparent'}`}
               >
                 {item.name}
               </Link>
@@ -126,7 +134,7 @@ const NavBar = ({ items }: NavBarProps): React.JSX.Element => {
             href="https://www.linkedin.com/company/boulder-artemis-consulting/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className={`nav-bar-linkedin ${isScrolled ? 'nav-bar-linkedin-scrolled' : 'nav-bar-linkedin-transparent'}`}
+            className={`nav-bar-linkedin ${(isScrolled || !isLandingPage) ? 'nav-bar-linkedin-scrolled' : 'nav-bar-linkedin-transparent'}`}
           >
             <Linkedin size={24} />
           </a>
@@ -136,7 +144,7 @@ const NavBar = ({ items }: NavBarProps): React.JSX.Element => {
         <div className="nav-bar-mobile-button">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className={`nav-bar-toggle ${isScrolled ? 'nav-bar-toggle-scrolled' : 'nav-bar-toggle-transparent'}`}
+            className={`nav-bar-toggle ${(isScrolled || !isLandingPage) ? 'nav-bar-toggle-scrolled' : 'nav-bar-toggle-transparent'}`}
             aria-label="Toggle navigation menu"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}

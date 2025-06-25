@@ -1,33 +1,22 @@
 /** @module HireArtemisPage */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Container,
   Typography,
   Button,
   Paper,
-  TextField,
-  Card,
-  CardContent,
-  Avatar,
-  Chip,
-  Divider
+  TextField
 } from '@mui/material';
 import {
-  TrendingUp,
-  Analytics,
-  Lightbulb,
-  AccountBalance,
-  CheckCircle,
   ArrowForward,
+  CheckCircle,
   Star,
-  Business,
-  DataUsage,
-  Psychology
+  AccountBalanceWallet,
+  RocketLaunch,
+  Insights
 } from '@mui/icons-material';
-
-// Removed unused imports
 
 import "./HireArtemisPage.css";
 
@@ -50,41 +39,48 @@ const HireArtemisPage = (): React.JSX.Element => {
     event.preventDefault();
     // TODO: Connect to backend
     console.log('Contact form submitted:', contactForm);
+    alert('Thank you for your message! We\'ll get back to you soon.');
   };
 
   const expertiseAreas = [
     {
-      category: "Analytics & Data",
-      skills: ["Data Analytics", "Business Intelligence", "Predictive Modeling", "Performance Metrics"]
+      icon: <Insights />,
+      title: "Analytics & Intelligence",
+      description: "Transform raw data into actionable insights that drive strategic decision-making",
+      skills: ["Advanced Analytics", "Machine Learning", "Business Intelligence", "Predictive Modeling", "Data Visualization", "Statistical Analysis"]
     },
     {
-      category: "Strategy & Growth", 
-      skills: ["Strategic Consulting", "Market Analysis", "Growth Strategy", "Investment Analysis"]
+      icon: <RocketLaunch />,
+      title: "Strategy & Growth",
+      description: "Develop comprehensive strategies that accelerate growth and maximize market opportunities",
+      skills: ["Strategic Planning", "Market Research", "Competitive Analysis", "Growth Hacking", "Go-to-Market", "Digital Transformation"]
     },
     {
-      category: "Operations & Finance",
-      skills: ["Process Optimization", "Financial Modeling", "Risk Assessment", "Automation Strategy"]
+      icon: <AccountBalanceWallet />,
+      title: "Operations & Finance",
+      description: "Optimize operations and financial performance through innovative processes and technology",
+      skills: ["Process Optimization", "Financial Modeling", "Risk Management", "Supply Chain", "Cost Reduction", "Automation"]
     }
   ];
 
-  const process = [
+  const processSteps = [
     {
-      step: "01",
+      number: "01",
       title: "Discovery & Scoping",
-      description: "We dive deep into your business challenges, objectives, and requirements to craft a tailored solution approach."
+      description: "We discuss your business challenges, objectives, and requirements to craft a tailored approach."
     },
     {
-      step: "02",
+      number: "02",
       title: "Strategic Planning",
       description: "Our team develops a comprehensive project plan with clear deliverables, timelines, and success metrics."
     },
     {
-      step: "03",
+      number: "03",
       title: "Execution & Analysis",
       description: "We execute the project with regular check-ins, applying cutting-edge methodologies and industry best practices."
     },
     {
-      step: "04",
+      number: "04",
       title: "Delivery & Impact",
       description: "We deliver actionable insights and recommendations, with ongoing support to ensure successful implementation."
     }
@@ -92,39 +88,61 @@ const HireArtemisPage = (): React.JSX.Element => {
 
   const testimonials = [
     {
-      name: "Sarah Chen",
-      title: "VP of Strategy, FirstBank",
-      company: "FirstBank",
-      content: "Artemis delivered exceptional FTP modeling that transformed how we approach treasury management. Their insights were game-changing.",
-      rating: 5
-    },
-    {
-      name: "Michael Rodriguez",
-      title: "Head of Analytics, Vital Farms",
-      company: "Vital Farms",
-      content: "The forecasting model Artemis built achieved 75% accuracy and revolutionized our supply chain planning. Outstanding work.",
-      rating: 5
-    },
-    {
-      name: "Jennifer Park",
-      title: "Operations Director, SmashBurger",
-      company: "SmashBurger",
-      content: "Their elasticity analysis provided clear, data-driven pricing strategies that directly impacted our bottom line. Highly recommended.",
-      rating: 5
+      name: "Brian Seeley",
+      title: "Executive Vice President, FirstBank",
+      content: "The Artemis team was so thorough and impressive to work with. They will be a true asset to any company! If you need help with financial modeling I now know a few young professionals I can recommend.",
+      rating: 5,
+      initials: "BS"
     }
   ];
+
+  const stats = [
+    { number: "4", label: "Projects Delivered" },
+    { number: "100%", label: "Client Satisfaction" },
+    { number: "4 months", label: "Avg. Engagement Length" }
+  ];
+
+  const highlights = [
+    "Free initial consultation",
+    "Custom project scoping",
+    "Flexible engagement models",
+    "Rapid turnaround times"
+  ];
+
+  useEffect(() => {
+    // Add intersection observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all animated elements
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="hire-artemis-page">
       {/* Hero Section */}
-      <section className="hero-section-simple">
-        <Container maxWidth="lg" className="hero-content">
-          <div className="hero-text">
+      <section className="hero-section">
+        <Container maxWidth="lg" className="hero-container">
+          <div className="hero-content">
             <Typography variant="h1" component="h1" className="hero-title">
               Partner with Boulder's
               <span className="hero-highlight"> Premier Consulting Team</span>
             </Typography>
-            <Typography variant="h5" component="h2" className="hero-subtitle">
+            <Typography variant="h5" component="p" className="hero-subtitle">
               Unlock your business potential with data-driven insights, strategic guidance, 
               and innovative solutions from CU Boulder's top consulting talent.
             </Typography>
@@ -142,7 +160,7 @@ const HireArtemisPage = (): React.JSX.Element => {
       </section>
 
       {/* Expertise Section */}
-      <section className="expertise-section">
+      <section className="section section-alt">
         <Container maxWidth="lg">
           <div className="section-header">
             <Typography variant="h2" component="h2" className="section-title">
@@ -153,30 +171,56 @@ const HireArtemisPage = (): React.JSX.Element => {
             </Typography>
           </div>
           
-          <Box className="expertise-categories">
-            {expertiseAreas.map((category, categoryIndex) => (
-              <div key={categoryIndex} className="expertise-category">
-                <Typography variant="h5" className="category-title">
-                  {category.category}
-                </Typography>
-                <Box className="category-skills">
-                  {category.skills.map((skill, skillIndex) => (
-                    <Chip 
-                      key={skillIndex} 
-                      label={skill} 
-                      className="expertise-chip"
-                      size="medium"
-                    />
-                  ))}
-                </Box>
+          <div className="expertise-container">
+            <div className="expertise-intro">
+              <Typography variant="h3" component="h3" className="expertise-intro-title">
+                Transforming Ideas Into Impact
+              </Typography>
+              <Typography variant="body1" className="expertise-intro-text">
+                Our multidisciplinary team combines deep technical expertise with strategic thinking 
+                to deliver solutions that don't just meet requirements—they exceed expectations and 
+                drive measurable business outcomes.
+              </Typography>
+              <div className="expertise-stats">
+                {stats.map((stat, index) => (
+                  <div key={index} className="stat-item">
+                    <span className="stat-number">{stat.number}</span>
+                    <span className="stat-label">{stat.label}</span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </Box>
+            </div>
+            
+            <div className="expertise-areas">
+                             {expertiseAreas.map((area, index) => (
+                 <div key={index} className="expertise-area fade-in">
+                   <div className="area-header">
+                     <div className="area-icon">{area.icon}</div>
+                     <div className="area-content">
+                       <Typography variant="h4" component="h4" className="area-title">
+                         {area.title}
+                       </Typography>
+                       <Typography variant="body1" className="area-description">
+                         {area.description}
+                       </Typography>
+                     </div>
+                   </div>
+                   <div className="area-skills">
+                     {area.skills.map((skill, skillIndex) => (
+                       <span key={skillIndex} className="skill-tag">
+                         {skill}
+                       </span>
+                     ))}
+                   </div>
+                 </div>
+               ))}
+            </div>
+          </div>
         </Container>
       </section>
 
       {/* Process Section */}
-      <section className="process-section">
+      <section className="section">
         <Container maxWidth="lg">
           <div className="section-header">
             <Typography variant="h2" component="h2" className="section-title">
@@ -188,18 +232,18 @@ const HireArtemisPage = (): React.JSX.Element => {
           </div>
 
           <div className="process-timeline">
-            {process.map((step, index) => (
-              <div key={index} className="process-step">
-                <div className="step-number">{step.step}</div>
+            {processSteps.map((step, index) => (
+              <div key={index} className="process-step fade-in">
+                <div className="step-number">{step.number}</div>
                 <div className="step-content">
-                  <Typography variant="h5" component="h3" className="step-title">
+                  <Typography variant="h3" component="h3" className="step-title">
                     {step.title}
                   </Typography>
                   <Typography variant="body1" className="step-description">
                     {step.description}
                   </Typography>
                 </div>
-                {index < process.length - 1 && <div className="step-connector" />}
+                {index < processSteps.length - 1 && <div className="step-connector" />}
               </div>
             ))}
           </div>
@@ -207,7 +251,7 @@ const HireArtemisPage = (): React.JSX.Element => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="testimonials-section">
+      <section className="section section-alt">
         <Container maxWidth="lg">
           <div className="section-header">
             <Typography variant="h2" component="h2" className="section-title">
@@ -218,140 +262,137 @@ const HireArtemisPage = (): React.JSX.Element => {
             </Typography>
           </div>
 
-          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' }, gap: 4 }}>
+          <div className="testimonials-grid">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="testimonial-card">
-                <CardContent className="testimonial-content">
-                  <div className="testimonial-rating">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="star-icon" />
-                    ))}
+              <div key={index} className="testimonial-card fade-in">
+                <div className="testimonial-rating">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="star-icon" />
+                  ))}
+                </div>
+                <Typography variant="body1" className="testimonial-text">
+                  "{testimonial.content}"
+                </Typography>
+                <div className="testimonial-author">
+                  <div className="author-avatar">
+                    {testimonial.initials}
                   </div>
-                  <Typography variant="body1" className="testimonial-text">
-                    "{testimonial.content}"
-                  </Typography>
-                  <div className="testimonial-author">
-                    <Avatar className="author-avatar">
-                      {testimonial.name.split(' ').map(n => n[0]).join('')}
-                    </Avatar>
-                    <div className="author-info">
-                      <Typography variant="subtitle1" className="author-name">
-                        {testimonial.name}
-                      </Typography>
-                      <Typography variant="body2" className="author-title">
-                        {testimonial.title}
-                      </Typography>
-                      <Typography variant="body2" className="author-company">
-                        {testimonial.company}
-                      </Typography>
-                    </div>
+                  <div className="author-info">
+                    <Typography variant="h4" component="h4" className="author-name">
+                      {testimonial.name}
+                    </Typography>
+                    <Typography variant="body2" className="author-title">
+                      {testimonial.title}
+                    </Typography>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             ))}
-          </Box>
+          </div>
         </Container>
       </section>
 
       {/* Contact Section */}
-      <section className="contact-section" id="contact">
+      <section className="section contact-section" id="contact">
         <Container maxWidth="lg">
-          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: 6 }}>
+          <div className="contact-content">
             <div className="contact-info">
               <Typography variant="h2" component="h2" className="contact-title">
                 Ready to Transform Your Business?
               </Typography>
-              <Typography variant="h6" component="p" className="contact-subtitle">
+              <Typography variant="body1" className="contact-subtitle">
                 Let's discuss how Artemis can help you achieve your goals with innovative, 
                 data-driven solutions tailored to your unique challenges.
               </Typography>
               
-              <div className="contact-highlights">
-                <div className="highlight-item">
-                  <CheckCircle className="highlight-icon" />
-                  <Typography variant="body1">Free initial consultation</Typography>
-                </div>
-                <div className="highlight-item">
-                  <CheckCircle className="highlight-icon" />
-                  <Typography variant="body1">Custom project scoping</Typography>
-                </div>
-                <div className="highlight-item">
-                  <CheckCircle className="highlight-icon" />
-                  <Typography variant="body1">Flexible engagement models</Typography>
-                </div>
-                <div className="highlight-item">
-                  <CheckCircle className="highlight-icon" />
-                  <Typography variant="body1">Rapid turnaround times</Typography>
-                </div>
-              </div>
-
-              
+              <ul className="contact-highlights">
+                {highlights.map((highlight, index) => (
+                  <li key={index}>
+                    <CheckCircle className="check-icon" />
+                    <span>{highlight}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <Paper className="contact-form-container" elevation={3}>
-              <Typography variant="h4" component="h3" className="form-title">
+            <Paper className="contact-form" elevation={0}>
+              <Typography variant="h3" component="h3" className="form-title">
                 Get in Touch
               </Typography>
-              <form onSubmit={handleSubmit} className="contact-form">
-                <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 2, mb: 2 }}>
+              <form onSubmit={handleSubmit}>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="name">Your Name *</label>
+                    <TextField
+                      id="name"
+                      name="name"
+                      value={contactForm.name}
+                      onChange={handleInputChange('name')}
+                      required
+                      fullWidth
+                      variant="outlined"
+                      className="form-input"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="company">Company *</label>
+                    <TextField
+                      id="company"
+                      name="company"
+                      value={contactForm.company}
+                      onChange={handleInputChange('company')}
+                      required
+                      fullWidth
+                      variant="outlined"
+                      className="form-input"
+                    />
+                  </div>
+                </div>
+                
+                <div className="form-group">
+                  <label htmlFor="email">Email *</label>
                   <TextField
-                    fullWidth
-                    label="Your Name *"
-                    variant="outlined"
-                    value={contactForm.name}
-                    onChange={handleInputChange('name')}
-                    required
-                    className="form-field"
-                  />
-                  <TextField
-                    fullWidth
-                    label="Company *"
-                    variant="outlined"
-                    value={contactForm.company}
-                    onChange={handleInputChange('company')}
-                    required
-                    className="form-field"
-                  />
-                </Box>
-                <Box sx={{ mb: 2 }}>
-                  <TextField
-                    fullWidth
-                    label="Email *"
-                    variant="outlined"
+                    id="email"
+                    name="email"
                     type="email"
                     value={contactForm.email}
                     onChange={handleInputChange('email')}
                     required
-                    className="form-field"
-                  />
-                </Box>
-                <Box sx={{ mb: 2 }}>
-                  <TextField
                     fullWidth
-                    label="Project Description (Optional)"
                     variant="outlined"
+                    className="form-input"
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <label htmlFor="description">Project Description (Optional)</label>
+                  <TextField
+                    id="description"
+                    name="description"
                     multiline
                     rows={4}
                     value={contactForm.description}
                     onChange={handleInputChange('description')}
                     placeholder="Tell us about your project, challenges, and goals..."
-                    className="form-field"
+                    fullWidth
+                    variant="outlined"
+                    className="form-input"
                   />
-                </Box>
+                </div>
                 
                 <Button
                   type="submit"
                   variant="contained"
                   size="large"
                   fullWidth
-                  className="submit-button"
+                  className="submit-btn"
                   endIcon={<ArrowForward />}
                 >
                   Send Message
                 </Button>
               </form>
             </Paper>
-          </Box>
+          </div>
         </Container>
       </section>
     </div>

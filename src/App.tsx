@@ -9,6 +9,7 @@ import LandingPage from "./pages/LandingPage/LandingPage";
 import PortfolioPage from "./pages/PortfolioPage/PortfolioPage";
 import ApplicationsPage from "./pages/ApplicationsPage/ApplicationsPage";
 import HireArtemisPage from "./pages/HireArtemisPage/HireArtemisPage";
+import CalendarPage from "./pages/CalendarPage/CalendarPage";
 import NavBar from "./common/NavBar/NavBar";
 import { NAV_ITEMS } from "./common/NavBar/constants/navItems";
 
@@ -21,6 +22,7 @@ const App = (): React.JSX.Element => {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/applications" element={<ApplicationsPage />} />
           <Route path="/hire-artemis" element={<HireArtemisPage />} />
         </Routes>

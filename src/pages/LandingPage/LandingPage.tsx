@@ -13,6 +13,7 @@ import vfLogo from "../../common/assets/images/vf_logo.png";
 import flatironBg from "../../common/assets/images/flatiron_bg.jpg";
 import teamPhoto1 from "../../common/assets/images/initial_group_photo.jpeg";
 import teamPhoto2 from "../../common/assets/images/teamphoto.jpeg";
+import teamPhoto3 from "../../common/assets/images/eventPhoto.jpeg";
 import teamPhoto4 from "../../common/assets/images/artemis_fb_group.png";
 
 import "./LandingPage.css";
@@ -124,6 +125,30 @@ const LandingPage = (): React.JSX.Element => {
                 }}
               >
                 Join Our Team
+              </Button>
+              <Button 
+                component={Link}
+                to="/hire-artemis"
+                variant="contained" 
+                size="large"
+                sx={{ 
+                  bgcolor: 'rgba(255, 255, 255, 0.9)',
+                  color: theme.palette.primary.main,
+                  px: 4,
+                  py: 1.5,
+                  fontSize: '1.1rem',
+                  borderRadius: 8,
+                  boxShadow: '0 8px 32px rgba(255, 255, 255, 0.3)',
+                  '&:hover': { 
+                    bgcolor: 'white',
+                    transform: 'translateY(-2px)',
+                    boxShadow: '0 12px 40px rgba(255, 255, 255, 0.4)'
+                  },
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                Hire Artemis
+                <Business sx={{ ml: 1 }} />
               </Button>
             </Box>
           </Box>
@@ -382,8 +407,7 @@ const LandingPage = (): React.JSX.Element => {
               <img src={teamPhoto2} alt="Team Photo 2" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </Box>
             <Box className="team-photo-placeholder">
-              Team Photo 3<br/>
-              <Typography variant="caption">(Project Work)</Typography>
+              <img src={teamPhoto3} alt="Team Photo 3" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </Box>
             <Box className="team-photo-placeholder team-photo-4">
               <img src={teamPhoto4} alt="Team Events" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />

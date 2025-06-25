@@ -6,5 +6,11 @@ export const NAV_ITEMS: NavItem[] = [
   { name: "Home", href: "/" },
   { name: "Calendar", href: "/calendar" },
   { name: "Portfolio", href: "/portfolio" },
-  { name: "Applications", href: "/applications" },
+  { 
+    name: "Work with Us", 
+    dropdown: [
+      { name: "Hire Artemis", href: "/hire-artemis" },
+      { name: "Work at Artemis", href: "/applications" }
+    ]
+  },
 ]; 

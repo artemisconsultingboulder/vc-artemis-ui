@@ -12,6 +12,7 @@ import fbLogo from "../../common/assets/images/fb_logo.png";
 import vfLogo from "../../common/assets/images/vf_logo.png";
 import flatironBg from "../../common/assets/images/flatiron_bg.jpg";
 import teamPhoto1 from "../../common/assets/images/initial_group_photo.jpeg";
+import teamPhoto2 from "../../common/assets/images/teamphoto.jpeg";
 import teamPhoto4 from "../../common/assets/images/artemis_fb_group.png";
 
 import "./LandingPage.css";
@@ -378,8 +379,7 @@ const LandingPage = (): React.JSX.Element => {
               <img src={teamPhoto1} alt="Team Photo 1" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </Box>
             <Box className="team-photo-placeholder">
-              Team Photo 2<br/>
-              <Typography variant="caption">(Leadership)</Typography>
+              <img src={teamPhoto2} alt="Team Photo 2" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </Box>
             <Box className="team-photo-placeholder">
               Team Photo 3<br/>

@@ -8,6 +8,7 @@ import { designTheme } from "./common/theme/designTheme";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import PortfolioPage from "./pages/PortfolioPage/PortfolioPage";
 import ApplicationsPage from "./pages/ApplicationsPage/ApplicationsPage";
+import HireArtemisPage from "./pages/HireArtemisPage/HireArtemisPage";
 import NavBar from "./common/NavBar/NavBar";
 import { NAV_ITEMS } from "./common/NavBar/constants/navItems";
 
@@ -21,6 +22,7 @@ const App = (): React.JSX.Element => {
           <Route path="/" element={<LandingPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
           <Route path="/applications" element={<ApplicationsPage />} />
+          <Route path="/hire-artemis" element={<HireArtemisPage />} />
         </Routes>
       </Router>
     </ThemeProvider>

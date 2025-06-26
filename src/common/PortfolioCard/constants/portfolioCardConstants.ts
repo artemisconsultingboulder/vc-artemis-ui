@@ -18,3 +18,4 @@ export const DIGITAL_TRANSFORMATION_PROJECT_TYPE =
 export const DATA_ANALYTICS_PROJECT_TYPE = "Data Analytics" as const;
 export const PROCESS_AUTOMATION_PROJECT_TYPE = "Process Automation" as const;
 export const STRATEGY_CONSULTING_PROJECT_TYPE = "Strategy Consulting" as const;
+export const MARKET_RESEARCH_PROJECT_TYPE = "Market Research" as const;

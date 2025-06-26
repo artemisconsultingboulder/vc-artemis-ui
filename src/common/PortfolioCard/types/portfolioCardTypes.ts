@@ -16,7 +16,8 @@ export type ProjectType =
   | "Digital Transformation"
   | "Data Analytics"
   | "Process Automation"
-  | "Strategy Consulting";
+  | "Strategy Consulting"
+  | "Market Research";
 
 export type ProjectMetrics = {
   duration: string;

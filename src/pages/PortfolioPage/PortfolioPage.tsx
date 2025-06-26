@@ -5,7 +5,8 @@ import {
   DATA_ANALYTICS_PROJECT_TYPE,
   MACHINE_LEARNING_PROJECT_TYPE,
   FINANCIAL_PLANNING_PROJECT_TYPE,
-  STRATEGY_CONSULTING_PROJECT_TYPE
+  STRATEGY_CONSULTING_PROJECT_TYPE,
+  MARKET_RESEARCH_PROJECT_TYPE
 } from "../../common/PortfolioCard/constants/portfolioCardConstants";
 import type { PortfolioCardProps } from "../../common/PortfolioCard/types/portfolioCardTypes";
 
@@ -89,21 +90,24 @@ const SAMPLE_PROJECTS: PortfolioCardProps[] = [
   {
     image: syndeoLogo,
     companyType: PROFESSIONAL_DEVELOPMENT_COMPANY_TYPE,
-    projectName: "Info Coming Soon",
+    projectName: "Emerging Sector Pivot Strategy & Roadmap",
     companyName: "The Syndeo Institute",
     description:
-      "Info coming soon!",
+      "Conducted comprehensive industry and competitor analysis to identify five high-growth sectors aligned with the client’s core competencies, supporting a strategic exit from the declining cable market.",
     metrics: {
-      duration: "TBD",
-      teamSize: 5,
-      impact: "TBD"
+      duration: "3 Months",
+      teamSize: 6,
+      impact: "Defined roadmap for new industry"
     },
     projectTypes: [
       STRATEGY_CONSULTING_PROJECT_TYPE,
-      DATA_ANALYTICS_PROJECT_TYPE 
+      DATA_ANALYTICS_PROJECT_TYPE,
+      MARKET_RESEARCH_PROJECT_TYPE
     ],
     keyResults: [
-      "xxx",
+      "Conducted industry analysis to identify emerging high-growth sectors that align with the client’s core competencies",
+      "Researched current trends to identify promising industries and analyzed potential competitors in those spaces.",
+      "Assessed the barriers to entry and operational costs by looking at similar businesses and adapting those insights to fit the client’s current competencies."
     ]
   }
 ];

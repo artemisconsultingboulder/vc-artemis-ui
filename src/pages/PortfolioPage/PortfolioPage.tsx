@@ -90,14 +90,14 @@ const SAMPLE_PROJECTS: PortfolioCardProps[] = [
   {
     image: syndeoLogo,
     companyType: PROFESSIONAL_DEVELOPMENT_COMPANY_TYPE,
-    projectName: "Emerging Sector Pivot Strategy & Roadmap",
+    projectName: "Emerging Sector Analysis & Pivot Strategy + Roadmap",
     companyName: "The Syndeo Institute",
     description:
       "Conducted comprehensive industry and competitor analysis to identify five high-growth sectors aligned with the client’s core competencies, supporting a strategic exit from the declining cable market.",
     metrics: {
       duration: "3 Months",
       teamSize: 6,
-      impact: "Defined roadmap for new industry"
+      impact: "Defined roadmap for new industry focus"
     },
     projectTypes: [
       STRATEGY_CONSULTING_PROJECT_TYPE,

@@ -20,5 +20,14 @@ export interface ApplicationData {
   created_at?: string; // timestamptz type in database
 }
 
+// Types for client application data
+export interface ClientApplicationData {
+  name: string;
+  company: string;
+  email: string;
+  description: string;
+  created_at?: string; // timestamptz type in database
+}
+
 // Storage bucket name for resumes
 export const RESUMES_BUCKET = 'resumes'; 

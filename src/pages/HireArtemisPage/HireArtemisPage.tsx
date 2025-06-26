@@ -6,7 +6,9 @@ import {
   Typography,
   Button,
   Paper,
-  TextField
+  TextField,
+  Alert,
+  CircularProgress
 } from '@mui/material';
 import {
   ArrowForward,
@@ -18,6 +20,7 @@ import {
 } from '@mui/icons-material';
 
 import "./HireArtemisPage.css";
+import { submitClientApplication } from '../../common/services/clientApplicationService';
 
 const HireArtemisPage = (): React.JSX.Element => {
   const [contactForm, setContactForm] = useState({
@@ -27,6 +30,10 @@ const HireArtemisPage = (): React.JSX.Element => {
     description: ''
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
   const handleInputChange = (field: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setContactForm(prev => ({
       ...prev,
@@ -34,11 +41,33 @@ const HireArtemisPage = (): React.JSX.Element => {
     }));
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    // TODO: Connect to backend
-    console.log('Contact form submitted:', contactForm);
-    alert('Thank you for your message! We\'ll get back to you soon.');
+    setIsSubmitting(true);
+    setSubmitError('');
+    setSubmitSuccess(false);
+
+    try {
+      const result = await submitClientApplication(contactForm);
+      
+      if (result.success) {
+        setSubmitSuccess(true);
+        // Reset form on success
+        setContactForm({
+          name: '',
+          company: '',
+          email: '',
+          description: ''
+        });
+      } else {
+        setSubmitError(result.error || 'Failed to send message');
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      setSubmitError('An unexpected error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const expertiseAreas = [
@@ -331,6 +360,7 @@ const HireArtemisPage = (): React.JSX.Element => {
                       fullWidth
                       variant="outlined"
                       className="form-input"
+                      disabled={isSubmitting}
                     />
                   </div>
                   <div className="form-group">
@@ -344,6 +374,7 @@ const HireArtemisPage = (): React.JSX.Element => {
                       fullWidth
                       variant="outlined"
                       className="form-input"
+                      disabled={isSubmitting}
                     />
                   </div>
                 </div>
@@ -360,6 +391,7 @@ const HireArtemisPage = (): React.JSX.Element => {
                     fullWidth
                     variant="outlined"
                     className="form-input"
+                    disabled={isSubmitting}
                   />
                 </div>
                 
@@ -376,6 +408,7 @@ const HireArtemisPage = (): React.JSX.Element => {
                     fullWidth
                     variant="outlined"
                     className="form-input"
+                    disabled={isSubmitting}
                   />
                 </div>
                 
@@ -385,11 +418,23 @@ const HireArtemisPage = (): React.JSX.Element => {
                   size="large"
                   fullWidth
                   className="submit-btn"
-                  endIcon={<ArrowForward />}
+                  endIcon={isSubmitting ? undefined : <ArrowForward />}
+                  disabled={isSubmitting}
                 >
-                  Send Message
+                  {isSubmitting ? <CircularProgress size={24} /> : 'Send Message'}
                 </Button>
               </form>
+              
+              {submitError && (
+                <Alert severity="error" className="submit-error" sx={{ mt: 2 }}>
+                  {submitError}
+                </Alert>
+              )}
+              {submitSuccess && (
+                <Alert severity="success" className="submit-success" sx={{ mt: 2 }}>
+                  Thank you for your message! We'll get back to you soon.
+                </Alert>
+              )}
             </Paper>
           </div>
         </Container>

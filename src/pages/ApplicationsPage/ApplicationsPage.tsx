@@ -16,14 +16,21 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Alert
+  Alert,
+  Stack
 } from '@mui/material';
 import {
   TrendingUp,
   Hub,
   School,
-  WorkOutline,
-  CloudUpload
+  Event,
+  CloudUpload,
+  ArrowForward,
+  CheckCircle,
+  Assignment,
+  Search,
+  Chat,
+  Celebration
 } from '@mui/icons-material';
 
 import "./ApplicationsPage.css";
@@ -53,6 +60,7 @@ const ApplicationsPage = (): React.JSX.Element => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [fileError, setFileError] = useState('');
 
   const handleInputChange = (field: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
@@ -63,6 +71,24 @@ const ApplicationsPage = (): React.JSX.Element => {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
+    setFileError('');
+    
+    if (file) {
+      // Check file size (5MB limit)
+      const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+      if (file.size > maxSize) {
+        setFileError('File size must be less than 5MB');
+        return;
+      }
+      
+      // Check file type
+      const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+      if (!allowedTypes.includes(file.type)) {
+        setFileError('Please upload a PDF, DOC, or DOCX file');
+        return;
+      }
+    }
+    
     setFormData(prev => ({
       ...prev,
       resume: file
@@ -80,22 +106,22 @@ const ApplicationsPage = (): React.JSX.Element => {
     {
       icon: <TrendingUp />,
       title: "Real Client Experience",
-      description: "Work on actual business challenges with measurable impact"
+      description: "Work on actual business challenges with measurable impact, getting real-world experience for your resume."
     },
     {
       icon: <Hub />,
       title: "Professional Network",
-      description: "Connect with industry leaders and build lasting relationships"
+      description: "Connect with industry leaders and build lasting relationships."
     },
     {
       icon: <School />,
       title: "Skill Development",
-      description: "Master data analytics, strategy consulting, and business analysis"
+      description: "Master data analytics, strategy consulting, and business analysis."
     },
     {
-      icon: <WorkOutline />,
+      icon: <Event />,
       title: "Career Advancement",
-      description: "Portfolio projects that distinguish you in job applications"
+      description: "Have fun at social events, development workshops, retreats, and more!"
     }
   ];
 
@@ -113,6 +139,38 @@ const ApplicationsPage = (): React.JSX.Element => {
     { name: "Zoox", logo: zooxLogo },
     { name: "Air India", logo: airIndiaLogo },
     { name: "Adobe", logo: adobeLogo }
+  ];
+
+  const applicationProcess = [
+    {
+      icon: <Assignment />,
+      title: "Submit Application",
+      description: "Complete the online application form with your resume and academic information."
+    },
+    {
+      icon: <Search />, 
+      title: "Initial Review",
+      description: "Our team reviews your application and academic background for fit with our club."
+    },
+    {
+      icon: <Chat />,
+      title: "Interview Process",
+      description: "Selected candidates participate in behavioral and technical interviews with our staff."
+    },
+    {
+      icon: <Celebration />,
+      title: "Welcome to Artemis",
+      description: "Successful candidates join our community and begin their consulting journey."
+    }
+  ];
+
+  const requirements = [
+    "Currently enrolled CU Boulder student",
+    "Minimum 3.0 GPA required",
+    "Strong analytical and problem-solving skills", 
+    "Excellent written and verbal communication",
+    "Commitment to attend weekly meetings",
+    "Available for client project work (5-10 hours/week)"
   ];
 
   return (
@@ -176,6 +234,7 @@ const ApplicationsPage = (): React.JSX.Element => {
                 ))}
               </div>
             </div>
+
           </Box>
 
           {/* Right Form Section */}
@@ -278,8 +337,13 @@ const ApplicationsPage = (): React.JSX.Element => {
                       </Button>
                     </label>
                     <Typography variant="caption" className="upload-help">
-                      PDF, DOC, or DOCX format
+                      PDF, DOC, or DOCX format (Max 5MB)
                     </Typography>
+                    {fileError && (
+                      <Alert severity="error" className="file-error">
+                        {fileError}
+                      </Alert>
+                    )}
                   </div>
 
                   <Button
@@ -288,7 +352,7 @@ const ApplicationsPage = (): React.JSX.Element => {
                     fullWidth
                     size="large"
                     className="submit-button"
-                    disabled={!formData.name || !formData.year || !formData.major || !formData.email || !formData.phone}
+                    disabled={!formData.name || !formData.year || !formData.major || !formData.email || !formData.phone || !!fileError}
                   >
                     Submit Application
                   </Button>
@@ -300,7 +364,107 @@ const ApplicationsPage = (): React.JSX.Element => {
                 </form>
               )}
             </Paper>
+
+            {/* Requirements */}
+            <div className="requirements-section">
+              <Typography variant="h4" component="h3" className="requirements-title">
+                Requirements
+              </Typography>
+              <div className="requirements-grid">
+                {requirements.map((requirement, index) => (
+                  <div key={index} className="requirement-item">
+                    <CheckCircle className="requirement-icon" />
+                    <Typography variant="body1" className="requirement-text">
+                      {requirement}
+                    </Typography>
+                  </div>
+                ))}
+              </div>
+            </div>
           </Box>
+        </Box>
+
+        {/* Application Process */}
+        <Box
+          sx={{
+            bgcolor: 'rgba(255,255,255,0.8)',
+            borderRadius: 2,
+            p: { xs: 2, md: 4 },
+            textAlign: 'center',
+            mt: 4,
+            mb: 4,
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)'
+          }}
+        >
+          <Typography variant="h4" gutterBottom sx={{ color: '#343a40', fontWeight: 600 }}>
+            Application Process
+          </Typography>
+          <Typography variant="body1" color="text.secondary" mb={4} sx={{ fontSize: '1.1rem' }}>
+            Our application process is designed to identify passionate, capable students who will thrive in our collaborative environment.
+          </Typography>
+
+          <Stack
+            direction={{ xs: 'column', md: 'row' }}
+            spacing={{ xs: 4, md: 0 }}
+            justifyContent="center"
+            divider={
+              <Box
+                sx={{
+                  display: { xs: 'none', md: 'flex' },
+                  alignItems: 'center',
+                  height: 80, // Match the process-step-icon height
+                  mx: 2
+                }}
+              >
+                <ArrowForward color="error" sx={{ fontSize: 32, opacity: 0.7 }} />
+              </Box>
+            }
+          >
+            {applicationProcess.map((step, index) => (
+              <Box
+                key={index}
+                sx={{
+                  flex: 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  textAlign: 'center',
+                  maxWidth: { xs: '100%', md: '250px' }
+                }}
+              >
+                <Box
+                  sx={{
+                    width: 80,
+                    height: 80,
+                    borderRadius: '50%',
+                    bgcolor: '#D44C4C',
+                    background: 'linear-gradient(135deg, #D44C4C, #c03d3d)',
+                    color: 'common.white',
+                    mb: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 6px 20px rgba(212, 76, 76, 0.3)',
+                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                      boxShadow: '0 8px 30px rgba(212, 76, 76, 0.4)'
+                    }
+                  }}
+                >
+                  <Box sx={{ fontSize: '2rem' }}>
+                    {step.icon}
+                  </Box>
+                </Box>
+                <Typography variant="h6" gutterBottom sx={{ fontWeight: 600, color: '#343a40', fontSize: '1.1rem' }}>
+                  {step.title}
+                </Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.95rem', lineHeight: 1.5 }}>
+                  {step.description}
+                </Typography>
+              </Box>
+            ))}
+          </Stack>
         </Box>
       </Container>
     </div>

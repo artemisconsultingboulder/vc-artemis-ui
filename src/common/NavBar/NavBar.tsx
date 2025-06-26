@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Linkedin, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { FiLinkedin } from "react-icons/fi";
 import type { NavBarProps } from "./types/navBarTypes";
 
 import logoNoWords from "../assets/images/logo_no_words-removebg-preview.png";
@@ -136,7 +137,7 @@ const NavBar = ({ items }: NavBarProps): React.JSX.Element => {
             rel="noopener noreferrer"
             className={`nav-bar-linkedin ${(isScrolled || !isLandingPage) ? 'nav-bar-linkedin-scrolled' : 'nav-bar-linkedin-transparent'}`}
           >
-            <Linkedin size={24} />
+            <FiLinkedin size={24} />
           </a>
         </div>
 
@@ -189,7 +190,7 @@ const NavBar = ({ items }: NavBarProps): React.JSX.Element => {
               className="nav-bar-mobile-linkedin"
               onClick={() => setIsOpen(false)}
             >
-              <Linkedin size={24} />
+              <FiLinkedin size={24} />
               <span>LinkedIn</span>
             </a>
           </div>

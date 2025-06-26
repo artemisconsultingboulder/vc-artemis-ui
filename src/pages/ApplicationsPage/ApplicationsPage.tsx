@@ -186,8 +186,17 @@ const ApplicationsPage = (): React.JSX.Element => {
 
   return (
     <div className="applications-page">
-      <Container maxWidth="xl">
-        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '2fr 1fr' }, gap: 4 }} className="applications-content">
+      <Container 
+        disableGutters
+        maxWidth={false}
+        sx={{ px: { xs: 2, md: 4 } }}
+      >
+        <Box sx={{ 
+          display: 'grid', 
+          gridTemplateColumns: { xs: '1fr', lg: '2fr 1fr' }, 
+          gap: 4,
+          '& > *': { minWidth: 0 }
+        }} className="applications-content">
           {/* Left Content Section */}
           <Box>
             <div className="applications-header">

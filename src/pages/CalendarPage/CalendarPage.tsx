@@ -177,7 +177,7 @@ const CalendarPage = (): React.JSX.Element => {
             <div className="event-list">
               {dayEvents.map((event, index) => (
                 <div
-                  key={event.id}
+                  key={index}
                   className="event-item-inline"
                   style={{ backgroundColor: getEventTypeColor(event.type) }}
                   onClick={() => handleEventClick(event)}

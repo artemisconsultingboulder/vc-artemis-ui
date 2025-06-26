@@ -12,8 +12,6 @@ import {
   Select,
   MenuItem,
   Paper,
-  Grid,
-  Chip,
   List,
   ListItem,
   ListItemIcon,
@@ -21,7 +19,6 @@ import {
   Alert
 } from '@mui/material';
 import {
-  CheckCircle,
   TrendingUp,
   Hub,
   School,

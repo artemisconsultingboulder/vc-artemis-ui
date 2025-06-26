@@ -1,6 +1,6 @@
 /** @module LandingPage */
 
-import { Box, Container, Typography, Button, Card, CardContent, Avatar } from "@mui/material";
+import { Box, Container, Typography, Button, Card } from "@mui/material";
 import { ArrowForward, TrendingUp, Group, Business, CalendarMonth} from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";

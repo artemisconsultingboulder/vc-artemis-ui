@@ -17,7 +17,8 @@ import {
   ListItemIcon,
   ListItemText,
   Alert,
-  Stack
+  Stack,
+  CircularProgress
 } from '@mui/material';
 import {
   TrendingUp,
@@ -34,6 +35,8 @@ import {
 } from '@mui/icons-material';
 
 import "./ApplicationsPage.css";
+import { submitApplication } from '../../common/services/applicationService';
+import { validateResumeFile } from '../../common/utils/fileUtils';
 
 import kunaiLogo from "../../common/assets/images/alumniCompanyLogos/kunai_logo.png";
 import trinidadLogo from "../../common/assets/images/alumniCompanyLogos/trinidad_benham_logo.jpeg";
@@ -61,6 +64,8 @@ const ApplicationsPage = (): React.JSX.Element => {
 
   const [submitted, setSubmitted] = useState(false);
   const [fileError, setFileError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const handleInputChange = (field: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
@@ -74,17 +79,9 @@ const ApplicationsPage = (): React.JSX.Element => {
     setFileError('');
     
     if (file) {
-      // Check file size (5MB limit)
-      const maxSize = 5 * 1024 * 1024; // 5MB in bytes
-      if (file.size > maxSize) {
-        setFileError('File size must be less than 5MB');
-        return;
-      }
-      
-      // Check file type
-      const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-      if (!allowedTypes.includes(file.type)) {
-        setFileError('Please upload a PDF, DOC, or DOCX file');
+      const validation = validateResumeFile(file);
+      if (!validation.isValid) {
+        setFileError(validation.error || 'Invalid file');
         return;
       }
     }
@@ -95,11 +92,25 @@ const ApplicationsPage = (): React.JSX.Element => {
     }));
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    // TODO: Connect to backend
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      const result = await submitApplication(formData);
+      
+      if (result.success) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(result.error || 'Submission failed');
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      setSubmitError('An unexpected error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const benefits = [
@@ -258,6 +269,12 @@ const ApplicationsPage = (): React.JSX.Element => {
                 </Alert>
               ) : (
                 <form onSubmit={handleSubmit} className="application-form">
+                  {submitError && (
+                    <Alert severity="error" className="submit-error" sx={{ mb: 2 }}>
+                      {submitError}
+                    </Alert>
+                  )}
+
                   <TextField
                     fullWidth
                     label="Full Name"
@@ -266,6 +283,7 @@ const ApplicationsPage = (): React.JSX.Element => {
                     onChange={handleInputChange('name')}
                     required
                     className="form-field"
+                    disabled={isSubmitting}
                   />
 
                   <FormControl fullWidth variant="outlined" className="form-field">
@@ -275,6 +293,7 @@ const ApplicationsPage = (): React.JSX.Element => {
                       onChange={(e) => setFormData(prev => ({ ...prev, year: e.target.value }))}
                       label="Year in College (2025-26)"
                       required
+                      disabled={isSubmitting}
                     >
                       <MenuItem value="freshman">Freshman</MenuItem>
                       <MenuItem value="sophomore">Sophomore</MenuItem>
@@ -292,6 +311,7 @@ const ApplicationsPage = (): React.JSX.Element => {
                     onChange={handleInputChange('major')}
                     required
                     className="form-field"
+                    disabled={isSubmitting}
                   />
 
                   <TextField
@@ -304,6 +324,7 @@ const ApplicationsPage = (): React.JSX.Element => {
                     required
                     className="form-field"
                     helperText="Please use your @colorado.edu email address"
+                    disabled={isSubmitting}
                   />
 
                   <TextField
@@ -315,6 +336,7 @@ const ApplicationsPage = (): React.JSX.Element => {
                     onChange={handleInputChange('phone')}
                     required
                     className="form-field"
+                    disabled={isSubmitting}
                   />
 
                   <div className="file-upload-section">
@@ -324,6 +346,7 @@ const ApplicationsPage = (): React.JSX.Element => {
                       id="resume-upload"
                       type="file"
                       onChange={handleFileChange}
+                      disabled={isSubmitting}
                     />
                     <label htmlFor="resume-upload">
                       <Button
@@ -332,12 +355,13 @@ const ApplicationsPage = (): React.JSX.Element => {
                         startIcon={<CloudUpload />}
                         fullWidth
                         className="upload-button"
+                        disabled={isSubmitting}
                       >
                         {formData.resume ? formData.resume.name : 'Upload Resume'}
                       </Button>
                     </label>
                     <Typography variant="caption" className="upload-help">
-                      PDF, DOC, or DOCX format (Max 5MB)
+                      PDF, DOC, or DOCX format (Max 3MB)
                     </Typography>
                     {fileError && (
                       <Alert severity="error" className="file-error">
@@ -352,9 +376,19 @@ const ApplicationsPage = (): React.JSX.Element => {
                     fullWidth
                     size="large"
                     className="submit-button"
-                    disabled={!formData.name || !formData.year || !formData.major || !formData.email || !formData.phone || !!fileError}
+                    disabled={
+                      isSubmitting || 
+                      !formData.name || 
+                      !formData.year || 
+                      !formData.major || 
+                      !formData.email || 
+                      !formData.phone || 
+                      !formData.resume ||
+                      !!fileError
+                    }
+                    startIcon={isSubmitting ? <CircularProgress size={20} color="inherit" /> : undefined}
                   >
-                    Submit Application
+                    {isSubmitting ? 'Submitting...' : 'Submit Application'}
                   </Button>
 
                   <Typography variant="caption" className="form-notice">

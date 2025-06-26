@@ -1,6 +1,6 @@
 /** @module NavBar */
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { FiLinkedin } from "react-icons/fi";
@@ -13,7 +13,7 @@ const NavBar = ({ items }: NavBarProps): React.JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
-  const [hoverTimeout, setHoverTimeout] = useState<number | null>(null);
+  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
   const location = useLocation();
 
   const isActive = (path: string): boolean => location.pathname === path;

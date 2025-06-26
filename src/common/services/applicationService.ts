@@ -50,7 +50,7 @@ export const submitApplication = async (
     const uniqueFilename = generateUniqueFilename(formData.resume);
 
     // Upload file to Supabase storage
-    const { data: uploadData, error: uploadError } = await supabase.storage
+    const { error: uploadError } = await supabase.storage
       .from(RESUMES_BUCKET)
       .upload(uniqueFilename, formData.resume, {
         cacheControl: '3600',

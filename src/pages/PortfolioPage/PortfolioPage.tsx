@@ -89,24 +89,21 @@ const SAMPLE_PROJECTS: PortfolioCardProps[] = [
   {
     image: syndeoLogo,
     companyType: PROFESSIONAL_DEVELOPMENT_COMPANY_TYPE,
-    projectName: "Next Client Partnership",
+    projectName: "Info Coming Soon",
     companyName: "The Syndeo Institute",
     description:
-      "Ready to tackle your next business challenge? Artemis Consulting Club is actively seeking new client partnerships to deliver innovative solutions and measurable results.",
+      "Info coming soon!",
     metrics: {
-      duration: "3-4 months",
+      duration: "TBD",
       teamSize: 5,
-      impact: "To be determined"
+      impact: "TBD"
     },
     projectTypes: [
       STRATEGY_CONSULTING_PROJECT_TYPE,
-      DATA_ANALYTICS_PROJECT_TYPE
+      DATA_ANALYTICS_PROJECT_TYPE 
     ],
     keyResults: [
-      "Tailored approach based on your specific business needs",
-      "Dedicated team of CU Boulder's top consulting talent",
-      "End-to-end project delivery with measurable outcomes",
-      "Fresh perspectives and innovative problem-solving"
+      "xxx",
     ]
   }
 ];

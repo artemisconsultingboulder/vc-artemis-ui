@@ -284,9 +284,15 @@
 
 .nav-bar-mobile-menu {
   padding: 1rem;
-  background-color: var(--neutrals-white);
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
   border-top: 1px solid var(--neutrals-gray-extraLight);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 100;
 }
 
 .nav-bar-mobile-link {

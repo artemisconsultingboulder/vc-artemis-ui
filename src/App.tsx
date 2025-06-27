@@ -3,6 +3,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import { Analytics } from '@vercel/analytics/react';
 
 import { designTheme } from "./common/theme/designTheme";
 import LandingPage from "./pages/LandingPage/LandingPage";
@@ -12,6 +13,7 @@ import HireArtemisPage from "./pages/HireArtemisPage/HireArtemisPage";
 import CalendarPage from "./pages/CalendarPage/CalendarPage";
 import NavBar from "./common/NavBar/NavBar";
 import { NAV_ITEMS } from "./common/NavBar/constants/navItems";
+
 
 const App = (): React.JSX.Element => {
   return (
@@ -26,6 +28,7 @@ const App = (): React.JSX.Element => {
           <Route path="/applications" element={<ApplicationsPage />} />
           <Route path="/hire-artemis" element={<HireArtemisPage />} />
         </Routes>
+        <Analytics />
       </Router>
     </ThemeProvider>
   );
